@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+  <head><title>chatbot</title></head>
+  <body>
+    <div class="js-container"></div>
+
+    <script src="https://unpkg.com/supersimpledev/react.js"></script>
+    <script src="https://unpkg.com/supersimpledev/react-dom.js"></script>
+
+    <script src="https://unpkg.com/supersimpledev/babel.js"></script>
+
+    <script type="text/babel">
+
+      function ChatInput(){ //component
+        return (
+          <div>
+            <input 
+              placeholder="Send a message to Chatbot"
+              size="30" 
+            />
+            <button>Send</button>
+          </div>
+        );
+      }
+
+      function ChatMessage(props){
+        const {message, image} = props
+
+        return (
+        <div>
+          {image === 'robot' && (
+            <img src="images/robot.png" width="50" />
+          )}
+          {message}
+          {image === 'user' && (
+            <img src="images/user.png" width="50" />
+          )}
+        </div>
+      )}
+
+      function App(){
+        return (
+          <>
+          <ChatInput />
+          <ChatMessage 
+            message="mewo chatbot" 
+            image="user" />
+          <ChatMessage 
+            message="Meow meow moew" 
+            image="robot" />
+          <ChatMessage 
+            message="moo moo moo" 
+            image="user" />
+          <ChatMessage 
+            message="boom boom boom" 
+            image="robot" />
+        </>
+        )
+      }
+
+      const container = document.querySelector('.js-container')
+      ReactDOM.createRoot(container).render(<App />)
+    </script>
+  </body>
+</html>
