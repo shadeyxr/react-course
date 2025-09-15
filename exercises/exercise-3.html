@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+  <head><title>chatbot</title></head>
+  <body>
+    <div class="js-container"></div>
+
+    <script src="https://unpkg.com/supersimpledev/chatbot.js"></script>
+    <script src="https://unpkg.com/supersimpledev/react.js"></script>
+    <script src="https://unpkg.com/supersimpledev/react-dom.js"></script>
+
+    <script src="https://unpkg.com/supersimpledev/babel.js"></script>
+
+    <script type="text/babel">
+
+      function ClickButton({clickCount,setClickCount}){
+        
+        function increaseClickCount(){
+          setClickCount(clickCount+1)
+        }
+        return (
+          
+          <>
+            {(clickCount > 1 || clickCount === 0) && (
+              <button onClick={increaseClickCount}>clicked {clickCount} times</button>
+            )}
+            {clickCount === 1 && (
+              <button onClick={increaseClickCount}>clicked {clickCount} time</button>
+            )}
+          </>
+        )
+      }
+
+      function ResetButton({setClickCount}){
+        function resetClickCount(){
+          setClickCount(0)
+        }
+        return (
+          <button onClick={resetClickCount}>Reset</button>
+        )
+      }
+
+      function Input({chatInput, setChatInput}){
+        function saveInputText(event){
+          setChatInput(event.target.value)
+        }
+
+        return (
+          <input onChange={saveInputText} placeholder="Type something" />
+        )
+      }
+
+      function Text({chatInput}){
+        return (
+          <p>{chatInput}</p>
+        )
+      }
+
+      
+
+      function App(){
+        const [clickCount, setClickCount] = React.useState(0);
+        const [chatInput, setChatInput] = React.useState('');
+        return(
+          <div>
+            <ClickButton clickCount={clickCount} setClickCount={setClickCount} />
+            <ResetButton setClickCount={setClickCount} /> 
+            <div>
+              <Input chatInput={chatInput} setChatInput={setChatInput} />
+              <Text chatInput={chatInput} setChatInput={setChatInput} />
+            </div>
+          </div>
+        )
+      }
+
+      const container = document.querySelector('.js-container')
+      ReactDOM.createRoot(container).render(<App />)
+    </script>
+  </body>
+</html>
