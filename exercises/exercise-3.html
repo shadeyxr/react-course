@@ -12,7 +12,7 @@
 
     <script type="text/babel">
 
-      function ClickButton({clickCount,setClickCount}){
+      function ClickButton({clickCount,setClickCount, buttonRef}){
         
         function increaseClickCount(){
           setClickCount(clickCount+1)
@@ -21,10 +21,14 @@
           
           <>
             {(clickCount > 1 || clickCount === 0) && (
-              <button onClick={increaseClickCount}>clicked {clickCount} times</button>
+              <button onClick={increaseClickCount}
+              ref={buttonRef}
+              >clicked {clickCount} times</button>
             )}
             {clickCount === 1 && (
-              <button onClick={increaseClickCount}>clicked {clickCount} time</button>
+              <button onClick={increaseClickCount}
+              ref={buttonRef}
+              >clicked {clickCount} time</button>
             )}
           </>
         )
@@ -55,15 +59,30 @@
         )
       }
 
+      function AutoClick({buttonRef}){
+        function startAutoClick(){
+          setInterval(()=>{
+            const buttonElem = buttonRef.current 
+            buttonElem.click()
+          },1000)
+        }
+
+        return (
+          <button onClick={startAutoClick}>Auto Click</button>
+        )
+      }
+
       
 
       function App(){
         const [clickCount, setClickCount] = React.useState(0);
         const [chatInput, setChatInput] = React.useState('');
+        const buttonRef = React.useRef(null);
         return(
           <div>
-            <ClickButton clickCount={clickCount} setClickCount={setClickCount} />
+            <ClickButton clickCount={clickCount} setClickCount={setClickCount} buttonRef={buttonRef} />
             <ResetButton setClickCount={setClickCount} /> 
+            <AutoClick buttonRef={buttonRef} />
             <div>
               <Input chatInput={chatInput} setChatInput={setChatInput} />
               <Text chatInput={chatInput} setChatInput={setChatInput} />

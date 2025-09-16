@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>exercise 4 CHALLENGE</title>
+    <style>
+
+      body{
+        font-family: Arial, Helvetica, sans-serif;
+      }
+
+      .title{
+        font-weight: 1;
+      }
+
+      .password-input,
+      .email-input{
+        padding:8px 12px;
+        border-radius: 5px;
+        border-width:1px;
+        width:180px;
+        margin-right:5px;
+      }
+
+      .login-container{
+        margin-bottom:9px;
+      }
+
+      .signup-button,
+      .login-button{
+        background-color: rgb(0,123,255);
+        margin-right:5px;
+        padding:8px 10px;
+        border:none;
+        border-radius:5px;
+        color:white;
+      }
+
+
+    </style>
+  </head>
+  <body>
+    <div class="js-container"></div>
+
+    <script src="https://unpkg.com/supersimpledev/react.js"></script>
+    <script src="https://unpkg.com/supersimpledev/react-dom.js"></script>
+
+    <script src="https://unpkg.com/supersimpledev/babel.js"></script>
+    <script src="https://unpkg.com/supersimpledev/dayjs.js"></script>
+
+    <script type="text/babel">
+      
+      function HeaderText(){
+        return (
+          <h1 className="title">Hello, welcome to my website</h1>
+        )
+      }
+
+      function EmailLoginInput(){
+        return (
+          <div className="login-container">
+            <input className="email-input" placeholder="Email" />  
+          </div>
+        )
+      }
+
+      function PasswordLoginInput(){
+        const [showPassword, setShowPassword] = React.useState(false)
+
+        function changeShowPassword(){
+          setShowPassword(!showPassword)
+        }
+
+        return (
+          (!showPassword ? 
+          <div className="login-container">
+            <input className="password-input" placeholder="Password" type={'password'} />  
+            <button onClick={changeShowPassword}>Show</button>
+          </div>
+          : 
+          <div className="login-container">
+            <input className="password-input" placeholder="Password" type={'text'} />  
+            <button onClick={changeShowPassword}>Hide</button>
+          </div>
+          )
+          
+        )
+      }
+
+      function LoginButton(){
+        return (
+          <>
+            <button className="login-button">Login</button>
+          </>
+        )
+      }
+
+      function SignUpButton(){
+        return (
+          <>
+            <button className="signup-button">Sign up</button>
+          </>
+        )
+      }
+
+      function Clock(){
+        const [currentTime, setCurrentTime] = React.useState(dayjs().format('HH:mm:ss'))
+        React.useEffect(()=>{
+          const intervalId = setInterval(()=>{
+            setCurrentTime(dayjs().format('HH:mm:ss'))
+            console.log('meow')
+          },1000)
+          return () => clearInterval(intervalId);
+        },[])
+        return (
+          <p>Current time: {currentTime}</p>
+        )
+      }
+
+      function App(){
+        return (
+          <>
+            <Clock />
+            <HeaderText />
+            <EmailLoginInput />
+            <PasswordLoginInput />
+            <LoginButton />
+            <SignUpButton />
+          </>
+        )
+      }
+
+      const container = document.querySelector('.js-container')
+      ReactDOM.createRoot(container).render(<App />)
+    </script>
+    
+  </body>
+</html>
