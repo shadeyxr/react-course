@@ -1,6 +1,29 @@
 <!DOCTYPE html>
 <html>
-  <head><title>chatbot</title></head>
+  <head>
+    <title>chatbot</title>
+    <style>
+      .auto-click-button,
+      .reset-button,
+      .click-button{
+        background-color: rgb(25,135,84);
+        color:white;
+        padding: 7px 7px;
+        border:none;
+        margin-bottom:25px;
+        margin-right:9px;
+        cursor: pointer;
+      }
+
+      .container{
+        display: flex;
+        flex-direction: column;
+        height: 100vh;
+        background-color: rgb(222,222,222);
+        align-items: center;
+      }
+    </style>
+  </head>
   <body>
     <div class="js-container"></div>
 
@@ -23,11 +46,13 @@
             {(clickCount > 1 || clickCount === 0) && (
               <button onClick={increaseClickCount}
               ref={buttonRef}
+              className="click-button"
               >clicked {clickCount} times</button>
             )}
             {clickCount === 1 && (
               <button onClick={increaseClickCount}
               ref={buttonRef}
+              className="click-button"
               >clicked {clickCount} time</button>
             )}
           </>
@@ -39,7 +64,10 @@
           setClickCount(0)
         }
         return (
-          <button onClick={resetClickCount}>Reset</button>
+          <button 
+          onClick={resetClickCount}
+          className="reset-button"
+          >Reset</button>
         )
       }
 
@@ -49,7 +77,11 @@
         }
 
         return (
-          <input onChange={saveInputText} placeholder="Type something" />
+          <input 
+          onChange={saveInputText} 
+          placeholder="Type something"
+          className="show-input"
+           />
         )
       }
 
@@ -68,7 +100,10 @@
         }
 
         return (
-          <button onClick={startAutoClick}>Auto Click</button>
+          <button 
+          onClick={startAutoClick}
+          className="auto-click-button"
+          >Auto Click</button>
         )
       }
 
@@ -79,10 +114,13 @@
         const [chatInput, setChatInput] = React.useState('');
         const buttonRef = React.useRef(null);
         return(
-          <div>
-            <ClickButton clickCount={clickCount} setClickCount={setClickCount} buttonRef={buttonRef} />
-            <ResetButton setClickCount={setClickCount} /> 
-            <AutoClick buttonRef={buttonRef} />
+          <div className="container">
+            <div>
+              <ClickButton clickCount={clickCount} setClickCount={setClickCount} buttonRef={buttonRef} />
+              <ResetButton setClickCount={setClickCount} /> 
+              <AutoClick buttonRef={buttonRef} />
+            </div>
+
             <div>
               <Input chatInput={chatInput} setChatInput={setChatInput} />
               <Text chatInput={chatInput} setChatInput={setChatInput} />
