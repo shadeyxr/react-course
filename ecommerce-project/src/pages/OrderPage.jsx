@@ -28,7 +28,7 @@ export function OrdersPage({ cart }) {
           {
             (orders.length > 0 && orders.map((order) => {
               return (
-                <div className="order-container">
+                <div className="order-container" key={order.id}>
 
                   <div className="order-header">
                     <div className="order-header-left-section">

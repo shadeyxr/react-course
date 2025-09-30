@@ -1,4 +1,4 @@
-import {HomePage} from './pages/HomePage.jsx';
+import {HomePage} from './pages/Home/HomePage.jsx';
 import {CheckoutPage} from './pages/checkout/CheckoutPage.jsx'
 import { OrdersPage } from './pages/OrderPage.jsx';
 import { TrackingPage } from './pages/TrackingPage.jsx';
