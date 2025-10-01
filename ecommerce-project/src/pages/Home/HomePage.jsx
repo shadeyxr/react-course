@@ -10,7 +10,9 @@ export function HomePage({cart, products}) {
 
       <Header cart={cart} />
 
-      <div className="home-page"><ProductsGrid products={products} /></div>
+      <div className="home-page">
+        <ProductsGrid products={products} />
+      </div>
     </>
   )
 }
