@@ -1,6 +1,6 @@
 import formatMoney from "../../utils/money.js"
 
-export function GeneratePaymentSummary({paymentSummary}){
+export function PaymentSummary({paymentSummary}){
   return (
     paymentSummary && (
       <>
