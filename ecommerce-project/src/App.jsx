@@ -12,17 +12,16 @@ function App() {
   const [products,setProducts] = useState([])
   
   useEffect(()=>{
-    axios.get('/api/products')
-    .then((response)=>{
-      setProducts(response.data)
-    })
-    axios.get('/api/cart-items?expand=product')
-      .then((response)=>{
-        setCart(response.data)
-      })
-  },[])
+    const getData = async ()=>{
+      const productResponse = await axios.get('/api/products');
+      setProducts(productResponse.data)
+    
+      const cartResponse = await axios.get('/api/cart-items?expand=product')
+      setCart(cartResponse.data)
+    };
 
-  
+    getData();
+  },[])
 
   return (
     <>
