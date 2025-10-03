@@ -2,7 +2,7 @@ import { Header } from '../components/header.jsx'
 import { ProductsGrid } from './ProductsGrid.jsx'
 import './HomePage.css'
 
-export function HomePage({cart, products}) {
+export function HomePage({cart, products, loadData}) {
 
   return (
     <>
@@ -11,7 +11,7 @@ export function HomePage({cart, products}) {
       <Header cart={cart} />
 
       <div className="home-page">
-        <ProductsGrid products={products} />
+        <ProductsGrid products={products} loadData={loadData} />
       </div>
     </>
   )
