@@ -7,7 +7,7 @@ import axios from 'axios';
 import './checkout-header.css'
 import './checkout.css'
 
-export function CheckoutPage({ cart }) {
+export function CheckoutPage({ cart, loadData }) {
   const [deliveryOptions, setDeliveryOptions] = useState([])
   
 
@@ -30,11 +30,11 @@ export function CheckoutPage({ cart }) {
         <div className="checkout-grid">
 
           <div className="order-summary">
-            <OrderSummary deliveryOptions={deliveryOptions} cart={cart} />
+            <OrderSummary deliveryOptions={deliveryOptions} cart={cart} loadData={loadData} />
           </div>
 
           <div className="payment-summary">
-            <PaymentSummary />
+            <PaymentSummary cart={cart} />
           </div>
 
         </div>
