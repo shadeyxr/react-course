@@ -52,7 +52,7 @@ export function OrdersPage({ cart }) {
                   <div className="order-details-grid">
                     {order.products.map((product) => {
                       return (
-                        <Fragment key={product.id}>
+                        <Fragment key={`${order.id}-${product.product.id}`}>
                           <div className="product-image-container">
                             <img src={product.product.image} />
                           </div>
