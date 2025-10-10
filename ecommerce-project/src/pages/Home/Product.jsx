@@ -22,6 +22,7 @@ export function Product({ product, loadData }) {
     <div className="product-container">
       <div className="product-image-container">
         <img className="product-image"
+          data-testid="product-image"
           src={product.image} />
       </div>
 
@@ -31,7 +32,9 @@ export function Product({ product, loadData }) {
 
       <div className="product-rating-container">
         <img className="product-rating-stars"
-          src={`images/ratings/rating-${product.rating.stars * 10}.png`} />
+          src={`images/ratings/rating-${product.rating.stars * 10}.png`} 
+          data-testid="product-rating-stars"
+          />
         <div className="product-rating-count link-primary">
           {product.rating.count}
         </div>
