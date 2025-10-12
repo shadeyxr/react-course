@@ -10,6 +10,15 @@ import './checkout.css'
 export function CheckoutPage({ cart, loadData }) {
   const [deliveryOptions, setDeliveryOptions] = useState([])
   
+  const [paymentSummary, setPaymentSummary] = useState(null)
+
+  useEffect(() => {
+    async function getPaymentData() {
+      const paymentSummaryResponse = await axios.get('/api/payment-summary')
+      setPaymentSummary(paymentSummaryResponse.data)
+    }
+    getPaymentData()
+  }, [cart])
 
   useEffect(() => {
     async function getCheckoutData(){
@@ -34,7 +43,7 @@ export function CheckoutPage({ cart, loadData }) {
           </div>
 
           <div className="payment-summary">
-            <PaymentSummary cart={cart} loadData={loadData} />
+            <PaymentSummary paymentSummary={paymentSummary} loadData={loadData} />
           </div>
 
         </div>

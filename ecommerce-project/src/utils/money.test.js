@@ -9,6 +9,12 @@ describe('formatMoney',()=>{
   it('Displays 2 decimals', ()=>{
     expect(formatMoney(1000)).toBe('10.00')
   })
+
+  it('Works with a value of 0', ()=>{
+    expect(formatMoney(0)).toBe('0.00')
+  })
+
+  
 })  
 
 

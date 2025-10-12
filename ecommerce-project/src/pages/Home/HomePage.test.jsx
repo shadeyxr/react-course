@@ -1,20 +1,20 @@
-import {describe, it, expect, vi, beforeEach} from 'vitest';
-import {render, screen, within} from '@testing-library/react';
+import { describe, it, expect, vi, beforeEach } from 'vitest';
+import { render, screen, within } from '@testing-library/react';
 import { MemoryRouter } from 'react-router';
 import userEvent from '@testing-library/user-event'
-import {HomePage} from './HomePage.jsx'
+import { HomePage } from './HomePage.jsx'
 import axios from 'axios';
 
 vi.mock('axios')
 
-describe('HomePage Component', ()=>{
+describe('HomePage Component', () => {
   let loadData;
 
-  beforeEach(()=>{
+  beforeEach(() => {
     loadData = vi.fn();
 
-    axios.get.mockImplementation(async (urlPath)=>{
-      if (urlPath === '/api/products'){
+    axios.get.mockImplementation(async (urlPath) => {
+      if (urlPath === '/api/products') {
         return {
           data: [{
             id: "8c9c52b5-5a19-4bcb-a5d1-158a74287c53",
@@ -43,11 +43,11 @@ describe('HomePage Component', ()=>{
     })
   })
 
-  it('displays the products correctly', async ()=>{
+  it('displays the products correctly', async () => {
     render(
-    <MemoryRouter>
-      <HomePage cart={[]} loadData={loadData} />
-    </MemoryRouter>
+      <MemoryRouter>
+        <HomePage cart={[]} loadData={loadData} />
+      </MemoryRouter>
     )
 
     const productContainers = await screen.findAllByTestId('product-container')
@@ -62,5 +62,25 @@ describe('HomePage Component', ()=>{
       within(productContainers[1]).getByTestId('product-image')
     ).toHaveAttribute('src', 'images/products/women-plain-cotton-oversized-sweater-gray.jpg')
 
+  })
+
+  it('adds an item to the cart', async () => {
+    render(
+      <MemoryRouter>
+        <HomePage cart={[]} loadData={loadData} />
+      </MemoryRouter>
+    )
+    const productContainers = await screen.findAllByTestId('product-container')
+
+    const user = userEvent.setup()
+    const addButton = await within(productContainers[0]).findByTestId('add-to-cart-button')
+    const quantitySelector = await within(productContainers[0]).findByTestId('product-quantity')
+    await user.selectOptions(quantitySelector, '3')
+    await user.click(addButton);
+
+    expect(axios.post).toHaveBeenCalledWith('/api/cart-items', {
+      productId: "8c9c52b5-5a19-4bcb-a5d1-158a74287c53",
+      quantity: 3
+    })
   })
 })

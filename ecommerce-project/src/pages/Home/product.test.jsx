@@ -10,8 +10,10 @@ describe('Product component', ()=>{
   
   let loadData;
   let product;
+  let user;
  
   beforeEach(()=>{
+    user = userEvent.setup();
     loadData = vi.fn();
     product = {
       id: "e43638ce-6aa0-4b85-b27f-e1d07eb678c6",
@@ -53,18 +55,20 @@ describe('Product component', ()=>{
 
   it('Adds a product to the cart', async ()=>{
     render(<Product product={product} loadData={loadData} />);
-    const user = userEvent.setup();
+    
+    const quantitySelector = screen.getByTestId('product-quantity')
+    await user.selectOptions(quantitySelector, '3')
+    expect(quantitySelector).toHaveValue('3')
+
     const button = screen.getByTestId('add-to-cart-button');
     await user.click(button);
-
     expect(axios.post).toHaveBeenCalledWith( // this checks if the mocked function is ran and whether it contains the correct properties
       '/api/cart-items',
       {
         productId:"e43638ce-6aa0-4b85-b27f-e1d07eb678c6",
-        quantity:1
+        quantity:3
       }
     )
-
     expect(loadData).toHaveBeenCalled();
   })
 })
