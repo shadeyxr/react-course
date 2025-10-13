@@ -1,4 +1,4 @@
-import { Product } from "./Product.jsx"
+import { Product } from "./Product"
 
 export function ProductsGrid({products, loadData }) {
   return (

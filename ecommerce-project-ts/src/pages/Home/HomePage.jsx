@@ -1,5 +1,5 @@
-import { Header } from '../components/header.jsx'
-import { ProductsGrid } from './ProductsGrid.jsx'
+import { Header } from '../components/header'
+import { ProductsGrid } from './ProductsGrid'
 import {useState, useEffect} from 'react';
 import axios from 'axios';
 import './HomePage.css'

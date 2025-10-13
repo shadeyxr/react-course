@@ -1,4 +1,4 @@
-import formatMoney from "../../utils/money.js"
+import formatMoney from "../../utils/money"
 import dayjs from 'dayjs'
 import axios from 'axios';
 

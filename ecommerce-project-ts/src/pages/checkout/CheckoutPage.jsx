@@ -1,6 +1,6 @@
-import { PaymentSummary } from './PaymentSummary.jsx';
-import { OrderSummary } from './OrderSummary.jsx';
-import { CheckoutHeader } from './CheckoutHeader.jsx';
+import { PaymentSummary } from './PaymentSummary';
+import { OrderSummary } from './OrderSummary';
+import { CheckoutHeader } from './CheckoutHeader';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
